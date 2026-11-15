@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Farm Clim Tech · Eyes in the sky, in the farmer's hands</title>
+<meta name="description" content="Farm Clim Tech turns public NASA Earth-observation data into two simple answers for farmers: where the climate risk is in their field, and which crop rotation holds up best. Team ClimaUY · NASA Space Apps Challenge 2026 · Montevideo.">
+<meta property="og:title" content="Farm Clim Tech — Eyes in the sky, in the farmer's hands">
+<meta property="og:description" content="Public satellite data turned into climate decisions for Uruguayan farms. Team ClimaUY · NASA Space Apps Challenge 2026.">
+<meta property="og:image" content="assets/og-logo.png">
+<link rel="icon" type="image/svg+xml" href="assets/fct-icon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<style>
+@font-face{font-family:Inter;src:url(assets/fonts/Inter-Medium.otf);font-weight:500;font-display:swap}
+@font-face{font-family:Inter;src:url(assets/fonts/Inter-SemiBold.otf);font-weight:600;font-display:swap}
+@font-face{font-family:Inter;src:url(assets/fonts/Inter-Bold.otf);font-weight:700;font-display:swap}
+@font-face{font-family:InterDisplay;src:url(assets/fonts/InterDisplay-ExtraBold.otf);font-weight:800;font-display:swap}
+:root{--navy:#0F2A44;--deep:#08182A;--card:#0B1C2E;--lime:#A6E36B;--green:#4C8C2B;--ocre:#D9A441;--terra:#C4572A;--white:#F4F6F1;--sky:#BFD3E6;--mute:#8FA3B8;--line:rgba(255,255,255,.14)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,sans-serif;font-weight:500;background:var(--deep);color:var(--white);line-height:1.55;-webkit-font-smoothing:antialiased}
+img,video{max-width:100%;display:block}
+a{color:inherit}
+.wrap{width:min(1180px,92vw);margin:0 auto}
+.eyebrow{font-weight:700;font-size:.8rem;letter-spacing:.28em;text-transform:uppercase;color:var(--lime)}
+h1,h2,h3{font-family:InterDisplay,Inter,sans-serif;font-weight:800;letter-spacing:-.02em;line-height:1.05}
+h1{font-size:clamp(2.6rem,6.5vw,5.4rem)}
+h2{font-size:clamp(2rem,4.2vw,3.4rem);margin:.6rem 0 1rem}
+h3{font-size:1.45rem;margin-bottom:.4rem}
+.lead{font-size:clamp(1.05rem,1.6vw,1.3rem);color:var(--sky);font-weight:600;max-width:46rem}
+p{color:var(--sky)}
+section{padding:clamp(4rem,9vw,7.5rem) 0}
+
+/* nav */
+nav{position:fixed;inset:0 0 auto 0;z-index:20;backdrop-filter:blur(12px);background:rgba(8,24,42,.72);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+nav .brand img{height:40px;width:auto}
+nav ul{display:flex;gap:1.6rem;list-style:none;font-weight:600;font-size:.95rem}
+nav ul a{text-decoration:none;color:var(--sky)}
+nav ul a:hover{color:var(--white)}
+.btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--lime);color:#0B1C2E;font-weight:700;text-decoration:none;padding:.85rem 1.4rem;border-radius:14px;min-height:48px;transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:var(--white);border:1.5px solid var(--line)}
+@media (max-width:820px){nav ul{display:none}}
+
+/* hero */
+.hero{position:relative;min-height:min(100svh,920px);display:flex;align-items:center;padding-top:68px;overflow:hidden}
+.hero .bg{position:absolute;inset:0;background:url(assets/earthrise.webp) center 40%/cover no-repeat;transform:scale(1.06);animation:drift 24s ease-in-out infinite alternate}
+.hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,24,42,.94) 0%,rgba(8,24,42,.72) 45%,rgba(8,24,42,.15) 100%),linear-gradient(0deg,var(--deep) 0%,transparent 35%)}
+@keyframes drift{to{transform:scale(1.14) translateY(-2%)}}
+.hero .wrap{position:relative}
+.hero h1{margin:1rem 0 1.2rem;max-width:13ch}
+.hero h1 em{font-style:normal;color:var(--lime)}
+.hero .cta{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem}
+.hero .meta{margin-top:2.4rem;font-size:.85rem;color:var(--mute)}
+
+/* video */
+.video-card{border-radius:24px;overflow:hidden;border:1px solid var(--line);box-shadow:0 40px 90px rgba(0,0,0,.5);background:#000}
+.video-card video{width:100%;aspect-ratio:16/9}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2.5rem}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:1.6rem}
+.stat b{display:block;font-family:InterDisplay;font-weight:800;font-size:clamp(2.2rem,4vw,3.2rem);line-height:1;color:var(--white)}
+.stat.warn b{color:var(--ocre)}
+.stat.good b{color:var(--lime)}
+.stat span{color:var(--sky);font-weight:600}
+@media (max-width:820px){.stats{grid-template-columns:1fr}}
+
+/* split */
+.split{display:grid;grid-template-columns:1.05fr 1fr;gap:3rem;align-items:center}
+.split.rev{grid-template-columns:1fr 1.05fr}
+.split img{border-radius:22px;border:1px solid var(--line)}
+@media (max-width:900px){.split,.split.rev{grid-template-columns:1fr}}
+
+/* data cards */
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2.4rem}
+.card{background:linear-gradient(180deg,rgba(22,58,92,.55),rgba(11,28,46,.9));border:1px solid var(--line);border-radius:20px;padding:1.4rem}
+.card .eyebrow{font-size:.72rem}
+.card p{font-size:.95rem;margin-top:.3rem}
+@media (max-width:900px){.cards{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.cards{grid-template-columns:1fr}}
+
+/* screens */
+.screens{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem;margin-top:2.4rem}
+.screens figure{background:var(--card);border:1px solid var(--line);border-radius:22px;overflow:hidden}
+.screens figcaption{padding:1rem 1.2rem;color:var(--sky);font-weight:600}
+.screens figcaption b{color:var(--white)}
+.full{grid-column:1/-1}
+@media (max-width:820px){.screens{grid-template-columns:1fr}}
+
+/* phases */
+.phases{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2.4rem;counter-reset:ph}
+.phase{position:relative;border-radius:22px;overflow:hidden;min-height:340px;display:flex;flex-direction:column;justify-content:flex-end;padding:1.6rem;border:1px solid var(--line)}
+.phase::before{content:"";position:absolute;inset:0;background-size:cover;background-position:center;z-index:-2}
+.phase::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(8,24,42,.96) 25%,rgba(8,24,42,.35));z-index:-1}
+.phase.p1::before{background-image:url(assets/orbit.webp)}
+.phase.p2::before{background-image:url(assets/in-field-sun.webp)}
+.phase.p3::before{background-image:url(assets/fields.webp)}
+.phase .num{font-family:InterDisplay;font-weight:800;font-size:3rem;color:var(--lime);line-height:1}
+@media (max-width:900px){.phases{grid-template-columns:1fr}}
+
+/* tagline band */
+.band{background:linear-gradient(120deg,#163A5C,var(--navy) 55%,var(--deep));text-align:center}
+.band h2{max-width:18ch;margin:1rem auto}
+.band h2 em{font-style:normal;color:var(--lime)}
+
+footer{border-top:1px solid var(--line);padding:3rem 0;color:var(--mute);font-size:.88rem}
+footer .row{display:flex;justify-content:space-between;gap:2rem;flex-wrap:wrap;align-items:flex-start}
+footer img{height:46px;width:auto;margin-bottom:.8rem}
+footer p{color:var(--mute);max-width:44rem;margin-top:.4rem}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.hero .bg{animation:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Farm Clim Tech home"><img src="assets/fct-logo-transparent.svg" alt="Farm Clim Tech"></a>
+    <ul>
+      <li><a href="#film">Film</a></li>
+      <li><a href="#problem">Problem</a></li>
+      <li><a href="#data">NASA data</a></li>
+      <li><a href="#app">The app</a></li>
+      <li><a href="#model">Model</a></li>
+    </ul>
+    <a class="btn" href="#app">See the app</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="bg" role="img" aria-label="AI-generated image of the Earth rising over the Moon, inspired by the Apollo 8 Earthrise photo"></div>
+  <div class="wrap">
+    <div class="eyebrow">Team ClimaUY · NASA Space Apps Challenge 2026 · Montevideo</div>
+    <h1>Eyes in the sky, <em>in the farmer's hands.</em></h1>
+    <p class="lead">Farm Clim Tech turns public NASA Earth-observation data into two simple answers for every field: where the climate risk is, and which crop rotation holds up best.</p>
+    <div class="cta">
+      <a class="btn" href="#film">▶ Watch the 30-second film</a>
+      <a class="btn ghost" href="#app">Explore the app</a>
+    </div>
+    <p class="meta">Challenge: Field Shift — Adapting Farms with NASA Data</p>
+  </div>
+</header>
+
+<section id="film">
+  <div class="wrap">
+    <div class="eyebrow reveal">The film</div>
+    <h2 class="reveal">From Earthrise to the field</h2>
+    <p class="lead reveal">On December 24, 1968, Apollo 8 looked back and saw our fragile planet for the first time. Since then, the eyes in the sky never closed. We put them in the farmer's hands.</p>
+    <div class="video-card reveal" style="margin-top:2.2rem">
+      <video controls preload="metadata" playsinline poster="assets/poster.jpg">
+        <source src="assets/farm-clim-tech.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+</section>
+
+<section id="problem" style="background:linear-gradient(180deg,var(--deep),#0A1F35)">
+  <div class="wrap">
+    <div class="eyebrow reveal">The problem</div>
+    <h2 class="reveal">A small country that feeds many more</h2>
+    <p class="lead reveal">Uruguay produces food for about ten times its own population. When drought hits, it is not only a local loss: it shakes one of the stable suppliers that global food security relies on.</p>
+    <div class="stats">
+      <div class="stat reveal"><b>~3.5M</b><span>people live in Uruguay</span></div>
+      <div class="stat good reveal"><b>~30M</b><span>people fed by its food production, worldwide</span></div>
+      <div class="stat warn reveal"><b>¾</b><span>of the soy harvest lost in the 2022–23 drought</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="data">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <div class="eyebrow reveal">Phase 1 · The guardian in the sky</div>
+        <h2 class="reveal">Public satellite data, turned into two simple answers</h2>
+        <p class="lead reveal">Where is the climate risk in my field, and which crop rotation suits it best? Built for Uruguayan farmers aged 35 to 65 who check their phone in full sun, sometimes with weak signal.</p>
+      </div>
+      <img class="reveal" src="assets/orbit.webp" alt="AI-generated illustration of an Earth-observation satellite over South America" loading="lazy">
+    </div>
+    <div class="cards">
+      <div class="card reveal"><div class="eyebrow">SMAP</div><h3>Soil moisture</h3><p>How wet the soil is right now.</p></div>
+      <div class="card reveal"><div class="eyebrow">GPM</div><h3>Rainfall</h3><p>Last 30 days against the historical average.</p></div>
+      <div class="card reveal"><div class="eyebrow">MODIS</div><h3>Vegetation (NDVI)</h3><p>How green and healthy the crop is.</p></div>
+      <div class="card reveal"><div class="eyebrow">NASA POWER</div><h3>Climate history</h3><p>40 years of heat and rain to rank risk.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="app" style="background:linear-gradient(180deg,#0A1F35,var(--deep))">
+  <div class="wrap">
+    <div class="eyebrow reveal">Phase 2 · In the farmer's hands</div>
+    <h2 class="reveal">Seven screens, one path</h2>
+    <p class="lead reveal">Pin your field, see its condition today, read a year of risk at a glance, compare four crop rotations and get alerts that say what to do.</p>
+    <div class="screens">
+      <figure class="full reveal"><img src="assets/user-flow.webp" alt="User flow: onboarding, pin your field, dashboard, risk, rotations, see why, alerts" loading="lazy"><figcaption><b>User flow.</b> From the first tap to the first decision.</figcaption></figure>
+      <figure class="reveal"><img src="assets/screens-onboarding.webp" alt="Onboarding and pin-your-field screens" loading="lazy"><figcaption><b>Pin your field in under a minute.</b> Drop a pin or draw the outline on a satellite map.</figcaption></figure>
+      <figure class="reveal"><img src="assets/screen-field.webp" alt="Field dashboard with soil moisture, rainfall and vegetation cards" loading="lazy"><figcaption><b>The field today, in three cards.</b> Every number comes with a sentence that says what it means.</figcaption></figure>
+      <figure class="reveal"><img src="assets/screen-risk.webp" alt="Risk calendar showing 12 months of drought and heat risk" loading="lazy"><figcaption><b>A year of risk at a glance.</b> Based on 40 years of NASA POWER data.</figcaption></figure>
+      <figure class="reveal"><img src="assets/screen-rotations.webp" alt="Crop rotations ranked by climate resilience" loading="lazy"><figcaption><b>Which rotation holds up best.</b> Ranked by climate resilience, with the reasons and what to check.</figcaption></figure>
+      <figure class="reveal"><img src="assets/screen-alerts.webp" alt="Alerts screen with dry spell warning" loading="lazy"><figcaption><b>Alerts that say what to do.</b> The risk, the timing and the place to check.</figcaption></figure>
+      <figure class="reveal"><img src="assets/in-field-offline.webp" alt="The app on a phone in a pasture with cattle, working offline" loading="lazy"><figcaption><b>Works offline,</b> with the last saved data. Built to be read in full sun.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="model">
+  <div class="wrap">
+    <div class="eyebrow reveal">The model</div>
+    <h2 class="reveal">Three phases, one idea</h2>
+    <div class="phases">
+      <div class="phase p1 reveal"><div class="num">1</div><h3>The guardian in the sky</h3><p>NASA satellites watch soil, rain, vegetation and climate every day, for free and for everyone.</p></div>
+      <div class="phase p2 reveal"><div class="num">2</div><h3>In the farmer's hands</h3><p>That data becomes a simple app: risk on the map, the best rotation and alerts that say what to check.</p></div>
+      <div class="phase p3 reveal"><div class="num">3</div><h3>Replicate the model</h3><p>Uruguay first, then the Pampas, then the world: any farm with a phone can use the same open data.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <img src="assets/fct-icon.svg" alt="" width="96" height="96" style="margin:0 auto" class="reveal">
+    <h2 class="reveal">Eyes in the sky, <em>in the farmer's hands.</em></h2>
+    <p class="lead reveal" style="margin:0 auto">Los ojos del cielo, en manos del agricultor.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap row">
+    <div>
+      <img src="assets/fct-logo-transparent.svg" alt="Farm Clim Tech">
+      <p>Team ClimaUY · NASA Space Apps Challenge 2026 · Montevideo, Uruguay.</p>
+    </div>
+    <div>
+      <p><b>Data:</b> NASA SMAP, GPM, MODIS and NASA POWER (public data). NASA is named only as the source of the data; this project is not endorsed by NASA.</p>
+      <p>App screens are an illustrative prototype; scores and values are examples. Space and field imagery is AI-generated. Film audio: Apollo 8 onboard audio (NASA); narration generated with Kokoro TTS (open source).</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+if(!('IntersectionObserver' in window)||location.search.includes('static')){document.querySelectorAll('.reveal').forEach(e=>e.classList.add('in'))}
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
