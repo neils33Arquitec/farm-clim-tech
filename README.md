@@ -1,10 +1,10 @@
-# Farm Clim Tech
+# Farm ClimeTech
 
 **Eyes in the sky, in the farmer's hands.**
 
-Landing page for Farm Clim Tech, by Team ClimaUY for the NASA Space Apps Challenge 2026 (Montevideo), challenge *Field Shift: Adapting Farms with NASA Data*.
+Landing page for Farm ClimeTech, by Team ClimaUY for the NASA Space Apps Challenge 2026 (Montevideo), challenge *Field Shift: Adapting Farms with NASA Data*.
 
-Farm Clim Tech turns public NASA Earth-observation data (SMAP, GPM, MODIS, NASA POWER) into two simple answers for farmers: where the climate risk is in their field, and which crop rotation holds up best.
+Farm ClimeTech turns public NASA Earth-observation data (SMAP, GPM, MODIS, NASA POWER) into two simple answers for farmers: where the climate risk is in their field, and which crop rotation holds up best.
 
 - `public/` — static site served by Render
 - `brand/` — logo files (SVG/PNG)
